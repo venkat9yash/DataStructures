@@ -97,6 +97,41 @@ public class LinkedList<Type> {
         System.out.println(result.data);
         return  result;
     }
+
+    public void pivotAround(Integer key){
+        if(head!= null){
+            Node<Type> runner = head;
+            while(runner.next != null){
+                if(runner.next.data.equals(key)){
+                    Node<Type> pivot = runner.next;
+                    Node<Type> organizer = head;
+                    boolean passPivot = false;
+                    while(organizer != null){
+                        if(((Integer)organizer.data > (Integer)pivot.data) & !passPivot){
+                            if(organizer == head){
+                                head = organizer.next;
+                            }
+                            organizer.next = pivot.next;
+                            pivot.next = organizer;
+                        }
+                        else if(((Integer)organizer.data <= (Integer)pivot.data) & passPivot){
+                            organizer.next = pivot;
+                            runner.next = organizer;
+
+                        }
+                        if(organizer == pivot) passPivot = true;
+                        organizer = organizer.next;
+                    }
+
+                    break;
+                }
+                runner = runner.next;
+            }
+
+        }
+
+    }
+
     private static class Node<Type> {
         Node<Type> next;
         private Type data;

@@ -24,7 +24,6 @@ public class CircularList<Type> {
             }
             Node<Type> new_node = new Node<Type>(data, runner.link);
             runner.link = new_node;
-
         }
 
     }

@@ -1,7 +1,28 @@
 /**
  * Created by YashGunapati1 on 7/25/15.
  */
+import java.util.Scanner;
+
 public class Client {
+    public static int sortStartingPoint(Queue<Integer> petrol, int size){
+        int index = 1;
+        int tank = 0;
+        int p = 0, m = 0;
+        while(index <= size){
+            p = petrol.remove();
+            if((tank+p)-m >= 0){
+                tank = (tank+p) - m;
+            }
+            else{
+                index++;
+                tank = 0;
+            }
+            petrol.add(p);
+            petrol.add(m);
+
+        }
+        return index;
+    }
     public static void main(String args[]){
         //Stack
         //Stack stackList= new Stack<Float>();
@@ -53,6 +74,16 @@ public class Client {
 
         doubleList.traverseBack();
         doubleList.traverseFront();*/
+        Queue<Integer> petrol = new Queue<Integer>();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of Petrol Bunks:");
+        int n = Integer.parseInt(sc.nextLine());
+        for(int i=0; i< n; i++){
+            String [] input = sc.nextLine().split(" ");
+            petrol.add(Integer.parseInt(input[0]) - Integer.parseInt(input[1]));
+            //System.out.println(sc.nextLine());
+        }
+        sortStartingPoint(petrol, n);
 
     }
 }

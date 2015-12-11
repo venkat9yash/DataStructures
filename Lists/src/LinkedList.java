@@ -28,6 +28,7 @@ public class LinkedList<Type> {
         }
 
     }
+
     public void addAfter(Type key, Type data){
         Node<Type> search_key = head;
         while(search_key != null){
@@ -98,6 +99,17 @@ public class LinkedList<Type> {
         return  result;
     }
 
+    public void findMiddle(){
+        Node<Type> current = this.head, runner = this.head;
+        while(runner !=null && runner.next != null){
+            current = current.next;
+            runner = runner.next.next;
+        }
+
+         System.out.println("Middle Element is:" + current.data);
+
+    }
+
     public void pivotAround(Integer key){
         if(head!= null){
             Node<Type> runner = head;
@@ -132,9 +144,9 @@ public class LinkedList<Type> {
 
     }
 
-    private static class Node<Type> {
+    public static class Node<Type> {
         Node<Type> next;
-        private Type data;
+        Type data;
         public Node(Type data, Node<Type> next){
             this.next = next;
             this.data = data;

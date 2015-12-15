@@ -1,9 +1,7 @@
 /**
  * Created by YashGunapati1 on 7/29/15.
  */
-import org.apache.commons.compress.archivers.ar.ArArchiveEntry;
 
-import javax.sound.midi.SysexMessage;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -337,6 +335,33 @@ public class StringClient {
         }
         return true;
     }
+    public static boolean areAnagrams(String s1, String s2){
+        if(s1.length() == s2.length()){
+            char[] s1Array = s1.toCharArray();
+            char[] s2Array = s2.toCharArray();
+            Arrays.sort(s1Array);
+            Arrays.sort(s2Array);
+            if(new String(s1Array).equals(new String(s2Array))) return true;
+            else return false;
+        }
+        else{
+            return false;
+        }
+    }
+    public static String reverseStringInPlace(String input){
+        int length = input.length()/2;
+        int i =0;
+        int j = input.length() - 1;
+        while(i < length){
+            System.out.println(input = input.substring(0,i) + input.charAt(j) + input.substring(i+1, j) + input.charAt(i) + input.substring(j + 1,input.length()));
+            i++;
+            j--;
+        }
+
+        return input;
+
+    }
+
     public static void main(String args[]){
        /* char inputString[] = "randombtring".toCharArray();
         Arrays.sort(inputString);
@@ -369,6 +394,8 @@ public class StringClient {
        // System.out.println(anagramPalindrome("cdcdcdcdeeeef"));
         //combinations("", "ABC");
         //substring("YASH");
-        System.out.println(makePalindrome("cba"));
+        //System.out.println(makePalindrome("cba"));
+        //System.out.println(areAnagrams("hello","ehllo"));
+        reverseStringInPlace("Raja");
     }
 }

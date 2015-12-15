@@ -1,6 +1,7 @@
 import com.sun.xml.internal.fastinfoset.util.CharArray;
 
 import java.lang.reflect.Array;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Arrays;
 
@@ -163,7 +164,42 @@ public class ArrayClient {
         }
 
     }
+    public static int[] pushZerosToLast(int input[]){
+        int i=0;
+        int zeroIndex=0;
+        int j = input.length;
+        while(i < j){
+            if(input[i] != 0){
+                int temp = input[zeroIndex];
+                input[zeroIndex] = input[i];
+                input[i] = temp;
+                zeroIndex++;
 
+            }
+            i++;
+        }
+
+        return input;
+    }
+    public static int[] removeDuplicatesInPlace(int input[]){
+        int i=0;
+        int calculated_lenght = 0;
+        HashMap<Integer,Integer> storage = new HashMap<Integer, Integer>();
+        int j=input.length;
+        while(i < j){
+            if(!storage.containsKey(input[i])){
+                storage.put(input[i],1);
+                input[calculated_lenght] = input[i];
+                calculated_lenght++;
+            }
+            i++;
+        }
+        for(int x=j-1; x >= calculated_lenght; x-- ){
+            input[x] = -1;
+        }
+        System.out.println("Length is :" + calculated_lenght);
+        return input;
+    }
 
     public static void main(String args[]){
         //matrix A
@@ -192,8 +228,11 @@ public class ArrayClient {
         //pivotPartition(sampleArray,2);
         //int image[][] = {{9, 4, 1 },{7 ,5, 2}};
         //printMatrix(rotate90(image));
-        int[][] input = {{1,5,9},{2,6,4},{3,7,8}};
-        inplace90(input);
-
+        //int[][] input = {{1,5,9},{2,6,4},{3,7,8}};
+        //inplace90(input);
+        int[] input = {15,4,3,6,6,15,1,4};
+        for(int output : removeDuplicatesInPlace(input)){
+            System.out.println(output);
+        }
     }
 }

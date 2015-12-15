@@ -1,6 +1,7 @@
 import com.sun.xml.internal.fastinfoset.util.CharArray;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Arrays;
@@ -200,13 +201,51 @@ public class ArrayClient {
         System.out.println("Length is :" + calculated_lenght);
         return input;
     }
+    public static int[][] inplaceRotate90(int input[][]){
+        int m = input.length - 1;
+        int index = 0;
+        for(int i=0; i <= m/2  ; i++){
+            for (int j=0 + index; j<m-index; j++){
+                int temp = input[j][m-i];
+                input[j][m-i] = input[i][j] ;
+                int temp2 = input[m-i][m-j];
+                input[m-i][m-j] = temp;
+                int temp3 = input[m-j][i];
+                input[m-j][i] = temp2;
+                input[i][j] = temp3;
+                System.out.print(input[i][j]);
+                System.out.print(input[j][m-i]);
+                System.out.print(input[m-i][m-j]);
+                System.out.print(input[m-j][i]);
+                System.out.println();
+            }
+            index++;
+        }
+
+        return input;
+    }
+    public static int[] rotateByOrder(int[] input, int order){
+        int length = input.length ;
+        for(int i=0; i<order; i++){
+            int lastElement = input[length - 1];
+            for(int j=length - 1; j>0; j--){
+                input[j] = input[j-1];
+            }
+            input[0]=lastElement;
+        }
+        return input;
+    }
+    public static int[] addition(int[] a, int[] b){
+        ArrayList<Integer> output = new ArrayList<Integer>();
+        return a;
+    }
 
     public static void main(String args[]){
         //matrix A
         int mA = 3;
         int nA = 3;
-        int mB = 4;
-        int nB = 2;
+        int mB = 3;
+        int nB = 3;
         int A[][] = new int[mA][nA];
         int B[][] = new int[mB][nB];
         for(int i=0; i < mA; i++){
@@ -228,11 +267,16 @@ public class ArrayClient {
         //pivotPartition(sampleArray,2);
         //int image[][] = {{9, 4, 1 },{7 ,5, 2}};
         //printMatrix(rotate90(image));
-        //int[][] input = {{1,5,9},{2,6,4},{3,7,8}};
+        //int[][] input = {{1,2,3},{6,7,4},{3,1,5}};
         //inplace90(input);
         int[] input = {15,4,3,6,6,15,1,4};
-        for(int output : removeDuplicatesInPlace(input)){
-            System.out.println(output);
+        //for(int output : removeDuplicatesInPlace(input)){
+           // System.out.println(output);
+        //}
+        //printMatrix(inplaceRotate90(input));
+        for(int output : rotateByOrder(input,4)){
+             System.out.print(output);
         }
+
     }
 }

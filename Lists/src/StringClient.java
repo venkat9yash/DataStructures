@@ -357,9 +357,45 @@ public class StringClient {
             i++;
             j--;
         }
-
         return input;
 
+    }
+    public static void httpInPlace(String input, int orginal_len){
+        char[] inputArray = input.toCharArray();
+        int j = orginal_len - 1;
+        int x = input.length() - 1;
+        while(j >=0){
+            if(inputArray[j] != ' '){
+                inputArray[x] = inputArray[j];
+                x--;
+            }
+            else{
+                inputArray[x] = '0';
+                inputArray[x-1]='2';
+                inputArray[x-2]='%';
+                x = x-3;
+
+            }
+
+            j--;
+        }
+        for(char i : inputArray){
+            System.out.print(i);
+        }
+
+
+
+    }
+    public static boolean rotatedStringIsSubString(String old_String, String rotated_String){
+        if(old_String.length() == rotated_String.length() && old_String.length() > 0) {
+            if(((old_String + old_String).indexOf(rotated_String)) == - 1){
+                return false;
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public static void main(String args[]){
@@ -371,16 +407,16 @@ public class StringClient {
         else{
             System.out.println("Not Found");
         }
-        System.out.println(convertoHttp("Joe Doe is Stupid"));
+        System.out.println(convertoHttp("Joe Doe is Stupid")); */
 
-        basicCompression("uuurbrreedd");
-        System.out.println(isUnique("helo") ? "String is Unique" : "String is not Unique");
-        System.out.println(arePermutations("helo", "obhe") ? "Are Permutations" : "Not Permutations");
-        System.out.println(convertToIntIndex("ZZ"));
-        System.out.println(isPalindrome("ki malayalamik") ? "String is Palindrom" : "String is not Palindrom");
-        System.out.println(reverseString("God is Great"));
+       //basicCompression("uuurbrreedd");
+        //System.out.println(isUnique("helo") ? "String is Unique" : "String is not Unique");
+        //System.out.println(arePermutations("helo", "obhe") ? "Are Permutations" : "Not Permutations");
+        //System.out.println(convertToIntIndex("ZZ"));
+        //System.out.println(isPalindrome("ki malayalamik") ? "String is Palindrom" : "String is not Palindrom");
+        //System.out.println(reverseString("God is Great"));
         //permutations("yash","");
-        combinations("", "yash");*/
+        //combinations("", "yash");
        // Scanner scan = new Scanner(System.in);
        // System.out.println(panagram(scan.nextLine()));
        // String sample = "hello v e r a fin re";
@@ -396,6 +432,8 @@ public class StringClient {
         //substring("YASH");
         //System.out.println(makePalindrome("cba"));
         //System.out.println(areAnagrams("hello","ehllo"));
-        reverseStringInPlace("Raja");
+        //reverseStringInPlace("Raja");
+        //httpInPlace("Hello brother  ",13);
+        System.out.println(rotatedStringIsSubString("hellobrother","rotherhelloj"));
     }
 }

@@ -2,10 +2,10 @@
  * Created by YashGunapati1 on 7/29/15.
  */
 
-import java.util.Hashtable;
-import java.util.Scanner;
-import java.util.Arrays;
+
+import java.util.*;
 import java.lang.Character;
+
 public class StringClient {
     public static boolean search(char input[], char key, int low, int high)
     {
@@ -397,6 +397,123 @@ public class StringClient {
             return false;
         }
     }
+    public static void notationCaluculator(String prefix,String notation, String postfix){
+        String[] splits = notation.split(",");
+        for(String split : splits){
+            System.out.println(split);
+        }
+
+    }
+    public static int prefixCaluculator(String input){
+        String[] inputElements = input.split(" ");
+        Stack<Integer> operandStack = new Stack<Integer>();
+        int result = 1;
+        char operator = ' ';
+        for(int j=inputElements.length - 1; j>=0; j--){
+            String nextElement = inputElements[j].trim();
+            if(nextElement.equals("+") || nextElement.equals("-") || nextElement.equals("*") || nextElement.equals("/")){
+                operator = nextElement.charAt(0);
+                if(!operandStack.isEmpty()){
+                    int operand = operandStack.pop();
+                    if(!operandStack.isEmpty()){
+                        int operand2 = operandStack.pop();
+                        result *= performCaluculation(operand,operand2, operator);
+                    }
+                    else{
+                        result = performCaluculation(operand,result, operator);
+                    }
+                }
+                else{
+                    System.out.println("Illegal Expression");
+                    break;
+                }
+            }
+            else if(!nextElement.equals("(") && !nextElement.equals(")")){
+                operandStack.push(Integer.parseInt(nextElement));
+            }
+
+        }
+        return result;
+    }
+    public static int performCaluculation(int operand1, int operand2, char operator){
+        System.out.println(operand1 + ":" + operator + ":" + operand2);
+        int result=0;
+        switch (operator){
+            case '+'  : result = operand1 + operand2;
+                        break;
+            case '-'  : result = operand2 - operand1;
+                        break;
+            case '*'  : result = operand1 * operand2;
+                        break;
+            case '/'  : result = operand2 / operand2;
+                        break;
+        }
+        return result;
+    }
+    public static List<String> flipGamePosibilities(String s){
+        List<String> output = new ArrayList<String>();
+        int i = 0;
+        int j = 1;
+        while(j < s.length()){
+            if(s.charAt(i) == '+' && s.charAt(j) == '+'){
+                output.add(s.substring(0,i) + "--" + s.substring(j+1));
+                System.out.println(s.substring(0,i) + "--" + s.substring(j+1));
+            }
+            i++;
+            j++;
+        }
+        return output;
+    }
+    public static String longestDistinctSubString(String input){
+        String longestSubString = "";
+        String currentSubString = "";
+        HashMap<Character,Integer> characterStorage= new HashMap<Character,Integer>();
+        int inputLength = input.length();
+        int i =0;
+        while(i < inputLength){
+            char current_char = input.charAt(i);
+            System.out.println(i + ":" + current_char);
+            if(characterStorage.containsKey(current_char)){
+                if(currentSubString.length() > longestSubString.length()){
+                    System.out.println(longestSubString);
+                    longestSubString = currentSubString;
+                }
+                currentSubString = "";
+                int last_position = characterStorage.get(current_char);
+                characterStorage = new HashMap<Character,Integer>();
+                i = last_position;
+            }
+            else{
+
+                currentSubString += current_char;
+                characterStorage.put(current_char,i);
+            }
+            i++;
+        }
+        if(currentSubString.length() > longestSubString.length()){
+            System.out.println(currentSubString);
+            longestSubString = currentSubString;
+        }
+        return longestSubString;
+    }
+    public static void intz(int i, int j, int distance, String input){
+        System.out.println(input.substring(0,i) + distance + input.substring(j));
+        if(distance > 1){
+            intz(i+1,j,distance-1,input);
+            intz(i,j-1,distance-1,input);
+        }
+
+    }
+    public static void internationalization(String input){
+        int i= 1;
+        int j = input.length() - 1;
+        int distance = input.length() - 2;
+        //System.out.println(String.valueOf(input.charAt(i)) + distance + String.valueOf(input.charAt(j)));
+        intz(i,j,distance,input);
+
+
+
+    }
 
     public static void main(String args[]){
        /* char inputString[] = "randombtring".toCharArray();
@@ -415,8 +532,8 @@ public class StringClient {
         //System.out.println(convertToIntIndex("ZZ"));
         //System.out.println(isPalindrome("ki malayalamik") ? "String is Palindrom" : "String is not Palindrom");
         //System.out.println(reverseString("God is Great"));
-        //permutations("yash","");
-        //combinations("", "yash");
+        //permutations("ABC","");
+        //combinations("", "ABC");
        // Scanner scan = new Scanner(System.in);
        // System.out.println(panagram(scan.nextLine()));
        // String sample = "hello v e r a fin re";
@@ -434,6 +551,12 @@ public class StringClient {
         //System.out.println(areAnagrams("hello","ehllo"));
         //reverseStringInPlace("Raja");
         //httpInPlace("Hello brother  ",13);
-        System.out.println(rotatedStringIsSubString("hellobrother","rotherhelloj"));
+        //System.out.println(rotatedStringIsSubString("hellobrother","rotherhelloj"));
+        //notationCaluculator("","(a,b,cy)n,m","");
+        //System.out.println(prefixCaluculator("* 8 ( + 7 12 )"));
+        //System.out.println(prefixCaluculator("( * 4 6 ) ( + 7 12 )"));
+        //System.out.println(longestDistinctSubString("abcabcbb"));
+        //flipGamePosibilities("++++");
+        internationalization("lafooryash");
     }
 }

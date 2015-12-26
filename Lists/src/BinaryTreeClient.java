@@ -1,3 +1,6 @@
+import sun.awt.image.ImageWatched;
+import java.util.LinkedList;
+
 /**
  * Created by YashGunapati1 on 8/4/15.
  */
@@ -21,6 +24,11 @@ public class BinaryTreeClient {
         //tree.printLevelWise(tree.root, 1);
         //tree.printOrderWise(tree.root);
         //tree.exchangeLevelWise(tree.root,1);
-        tree.printTree(tree.root);
+        //tree.printTree(tree.root);
+        LinkedList<Integer> list = new LinkedList<Integer>();
+        tree.convertToLinkedList(list,tree.root);
+        for(int i=0; i< list.size(); i++){
+            System.out.println(list.get(i));
+        }
     }
 }

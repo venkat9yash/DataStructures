@@ -3,20 +3,13 @@ import  java.util.Stack;
 public class StackClient {
 
      private static void sortHannoiTowers(Integer top,Stack From, Stack To, Stack Using){
-         System.out.println(top);
-         if(top <= 0)return;
+         if(top == 1){
+             To.push(From.pop());
+         }
          else{
-             sortHannoiTowers(top - 1, From, To, Using);
-             int disk = (Integer) From.pop();
-             if(!(!To.isEmpty())){
-                 To.push(disk);
-             }
-
-             System.out.println("Moving Disk " + disk );
-             if(top - 1 !=0) {
-                 sortHannoiTowers(top - 1, Using, To, From);
-             }
-
+             sortHannoiTowers(top - 1, From, Using, To);
+             To.push(From.pop());
+             sortHannoiTowers(top - 1, Using, To, From);
          }
 
     }
@@ -60,7 +53,7 @@ public class StackClient {
 
 
         //Sorting
-        Stack forSort = new Stack();
+       /* Stack forSort = new Stack();
         forSort.push(8);
         forSort.push(29);
         forSort.push(2);
@@ -70,8 +63,31 @@ public class StackClient {
         for (int i = 0; i < 4; i++){
             System.out.println("Element" + result.peek());
             System.out.println(result.pop());
-        }
+        }*/
 
+      /*  DBLLStacks dblist = new DBLLStacks();
+        dblist.addElement(5);
+        dblist.addElement(7);
+        dblist.addElement(2);
+        dblist.addElement(9);
+        dblist.addElement(0);
+        System.out.println(dblist.currentElement());
+        dblist.moveNext();
+        System.out.println(dblist.currentElement());
+        dblist.moveBack();
+        System.out.println(dblist.currentElement()); */
+        Stack<Integer> stack1 = new Stack<Integer>();
+        Stack<Integer> stack2 = new Stack<Integer>();
+        Stack<Integer> stack3 = new Stack<Integer>();
+        stack1.add(5);
+        stack1.add(4);
+        stack1.add(3);
+        stack1.add(2);
+        stack1.add(1);
+        sortHannoiTowers(stack1.size(),stack1,stack3,stack2);
+        while(!stack3.isEmpty()){
+            System.out.println(stack3.pop());
+        }
 
 
     }

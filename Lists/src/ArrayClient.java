@@ -235,14 +235,128 @@ public class ArrayClient {
         }
         return input;
     }
-    public static int[] addition(int[] a, int[] b){
+
+
+    public static ArrayList<Integer> addition(int[] a, int[] b){
         ArrayList<Integer> output = new ArrayList<Integer>();
-        return a;
+        int i = a.length - 1;
+        int j = b.length - 1;
+        int carry =0;
+        while(i >=0 && j >=0){
+            int result = a[i] + b[j] + carry;
+            if(result >= 10){
+                carry = 1;
+                result = result % 10;
+            }
+            else{
+                carry = 0;
+            }
+            output.add(result);
+            i--;
+            j--;
+        }
+        while(i>=0){
+            output.add(a[i] + carry);
+            i--;
+        }
+        while(j>=0){
+            output.add(b[j] + carry);
+            j--;
+        }
+
+        return output;
     }
+    public static void printOnIndex(char inputChar, int old_h, int old_w, int new_h, int new_w){
+        int diff_h = old_h - new_h;
+        int diff_w = old_w - new_w;
+        String display_message = "";
+        if(diff_h > 0){
+            display_message = "Up";
+
+        }
+        else if(diff_h < 0){
+            diff_h = Math.abs(diff_h);
+            display_message = "Down";
+        }
+        for(int i=0; i<diff_h; i++){
+            System.out.println(display_message);
+        }
+        if(diff_w > 0){
+            display_message = "Left";
+
+        }
+        else if(diff_w < 0){
+            diff_w = Math.abs(diff_w);
+            display_message = "Right";
+
+        }
+        for(int x=0; x<diff_w; x++){
+            System.out.println(display_message);
+        }
+        System.out.println("Clicked---->" + Character.toUpperCase(inputChar));
+
+    }
+    public static void settopbox(String input){
+        char[][] alphabets = {{'a','b','c','d','e'},{'f','g','h','i','j'},{'k','l','m','n','o'},{'p','q','r','s','t'},{'u','v','w','x','y'},{'z'}};
+        char[] inputChars = input.toCharArray();
+        int h = 0;
+        int w = 0;
+        for(int i=0; i < inputChars.length; i++){
+            char charType = inputChars[i];
+            int charIndex = Character.getNumericValue(charType) - 10;
+            int h_index = charIndex/5;
+            int w_index = charIndex % 5;
+            System.out.println(charIndex + ":" + charType + ":" + h_index + ":" + w_index + "=>" + alphabets[h_index][w_index]);
+            printOnIndex(alphabets[h_index][w_index],h,w,h_index,w_index);
+            h= h_index;
+            w = w_index;
+        }
+
+    }
+    public static int[] mulitplyexpecti(int input[]){
+        int left_factor = 1;
+        int right_factor = 1;
+        int length = input.length;
+        int[] output = new int[length];
+        for(int j=length - 1; j>=0; j--){
+            output[j] = right_factor;
+            right_factor *= input[j];
+        }
+        for(int i=0; i <= length-1; i++){
+            output[i] *= left_factor;
+            left_factor *= input[i];
+        }
+        return output;
+    }
+    public static int splitByDiferrence(int input[], int number){
+        int i=0;
+        int j=input.length-1;
+        int variance = 0;
+        while(i!=j){
+
+            if(variance == 0){
+                if(input[i] == number){
+                    variance = 1;
+                }
+                i++;
+            }
+            else if(variance !=0){
+                if(input[j] != number){
+                    variance = 0;
+                }
+                j--;
+            }
+            System.out.println(variance + ":" + i + "," + j);
+
+        }
+
+        return i+1;
+    }
+
 
     public static void main(String args[]){
         //matrix A
-        int mA = 3;
+        /*int mA = 3;
         int nA = 3;
         int mB = 3;
         int nB = 3;
@@ -257,7 +371,7 @@ public class ArrayClient {
             for(int j=0; j < nB; j++){
                 B[i][j] = i + j;
             }
-        }
+        }*/
        // printMatrix(multiplyMatrix(A,B));
        // A[2][1] = 0;
         //matrixShootZero(A);
@@ -269,14 +383,28 @@ public class ArrayClient {
         //printMatrix(rotate90(image));
         //int[][] input = {{1,2,3},{6,7,4},{3,1,5}};
         //inplace90(input);
-        int[] input = {15,4,3,6,6,15,1,4};
+        //int[] input = {15,4,3,6,6,15,1,4};
         //for(int output : removeDuplicatesInPlace(input)){
            // System.out.println(output);
         //}
         //printMatrix(inplaceRotate90(input));
-        for(int output : rotateByOrder(input,4)){
+        /*for(int output : rotateByOrder(input,4)){
              System.out.print(output);
-        }
+        }*/
+        //int[] a = {5,7,7};
+        //int[] b = {7,3,2,7};
+        //ArrayList<Integer> result = addition(a,b);
+        //for(int i=result.size() - 1; i>=0; i-- ){
+          //  System.out.print(result.get(i));
+        //}
+       // int [] x = {5,2,3,4};
+        /*for(int product : mulitplyexpecti(x)){
+            System.out.print(product + ",");
+        }*/
+        //settopbox("hello");
+       // int input[] = {5,3,1,5,2,3,5};
+       // System.out.println("Need to Split the Array At " + splitByDiferrence(input,5));
+
 
     }
 }

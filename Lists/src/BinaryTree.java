@@ -256,6 +256,22 @@ public class BinaryTree {
         }
     }
 
+    public void convertToLinkedList(LinkedList<Integer> list, BinaryTreeNode btnode){
+        if(btnode != null){
+            list.add(btnode.value);
+            if(btnode.leftChild != null){
+                convertToLinkedList(list, btnode.leftChild);
+            }
+            if(btnode.rightChild != null){
+                convertToLinkedList(list, btnode.rightChild);
+            }
+
+        }
+        else{
+            return;
+        }
+    }
+
     int max(int a, int b) {
         return (a >= b) ? a : b;
     }
